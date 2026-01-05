@@ -1,14 +1,10 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./context/AuthContext.jsx";
-
-import Login from "./pages/Auth/Login.jsx";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Auth/Login";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import InstructorDashboard from "./pages/Instructor/InstructorDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const { role } = useContext(AuthContext);
-
   return (
     <Routes>
       <Route path="/" element={<Login />} />
@@ -16,17 +12,20 @@ function App() {
       <Route
         path="/admin"
         element={
-          role === "admin" ? <AdminDashboard /> : <Navigate to="/" />
+          <ProtectedRoute role="admin">
+            <AdminDashboard />
+          </ProtectedRoute>
         }
       />
 
       <Route
-          path="/instructor"
-          element={
-          role === "instructor" ? <InstructorDashboard /> : <Navigate to="/" />
-          }
+        path="/instructor"
+        element={
+          <ProtectedRoute role="instructor">
+            <InstructorDashboard />
+          </ProtectedRoute>
+        }
       />
-
     </Routes>
   );
 }

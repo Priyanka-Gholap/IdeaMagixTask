@@ -14,19 +14,28 @@ const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // LOGIN (Admin + Instructor)
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await API.post("/auth/login", { email, password });
-      login(res.data.token, res.data.role);
+ const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await API.post("/auth/login", {
+      email,
+      password,
+    });
 
-      if (res.data.role === "admin") navigate("/admin");
-      else navigate("/instructor");
-    } catch {
-      alert("Invalid email or password");
+    login(res.data.token, res.data.role);
+
+    if (res.data.role === "admin") {
+      navigate("/admin", { replace: true });
+    } else if (res.data.role === "instructor") {
+      navigate("/instructor", { replace: true });
+    } else {
+      navigate("/", { replace: true });
     }
-  };
+  } catch (err) {
+    alert(err.response?.data?.message || "Invalid email or password");
+  }
+};
+
 
   // SIGNUP (Instructor only → redirect to login)
   const handleSignup = async (e) => {
