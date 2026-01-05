@@ -11,30 +11,27 @@ dotenv.config();
 
 const app = express();
 
-/* =======================
-   ✅ CORS — ADD HERE
-======================= */
-app.use(
-  cors({
-    origin: "https://ideamagix-task.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+/* ======================
+   FINAL CORS FIX
+====================== */
+app.use(cors());
+app.options("*", cors());
 
-/* =======================
+/* ======================
    Body parser
-======================= */
+====================== */
 app.use(express.json());
 
-/* =======================
-   Routes — AFTER CORS
-======================= */
+/* ======================
+   Routes
+====================== */
 app.use("/auth", authRoutes);
 app.use("/admin", adminRoutes);
 app.use("/instructor", instructorRoutes);
 
-/* DB + Server */
+/* ======================
+   DB + Server
+====================== */
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
