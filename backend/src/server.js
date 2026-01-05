@@ -12,13 +12,12 @@ dotenv.config();
 const app = express();
 
 /* ======================
-   FINAL CORS FIX
+   ✅ CORS (EXPRESS 5 SAFE)
 ====================== */
 app.use(cors());
-app.options("*", cors());
 
 /* ======================
-   Body parser
+   Body Parser
 ====================== */
 app.use(express.json());
 
