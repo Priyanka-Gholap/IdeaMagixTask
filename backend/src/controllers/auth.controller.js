@@ -17,20 +17,23 @@ export const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET not defined");
+    }
+
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    res.json({
-      token,
-      role: user.role,
-    });
+    res.json({ token, role: user.role });
   } catch (error) {
+    console.error("LOGIN ERROR:", error); // 🔥 THIS LINE IS CRITICAL
     res.status(500).json({ message: "Login failed" });
   }
 };
+
 
 // SIGNUP (Instructor only)
 export const signup = async (req, res) => {
@@ -52,8 +55,12 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role: "instructor", // 🔒 IMPORTANT
+      role: "instructor",
     });
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET not defined");
+    }
 
     const token = jwt.sign(
       { id: user._id, role: user.role },
@@ -61,11 +68,10 @@ export const signup = async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    res.status(201).json({
-      token,
-      role: user.role,
-    });
+    res.status(201).json({ token, role: user.role });
   } catch (error) {
+    console.error("SIGNUP ERROR:", error);
     res.status(500).json({ message: "Signup failed" });
   }
 };
+
