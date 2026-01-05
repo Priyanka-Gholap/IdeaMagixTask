@@ -1,0 +1,109 @@
+.auth-page {
+  min-height: 100vh;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-card {
+  display: flex;
+  width: 900px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.auth-info {
+  width: 45%;
+  background: #111827;
+  color: white;
+  padding: 45px;
+}
+
+.auth-info h1 {
+  margin-bottom: 15px;
+}
+
+.auth-info p {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.auth-info ul {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.auth-info li {
+  margin-bottom: 10px;
+}
+
+.auth-form {
+  width: 55%;
+  padding: 40px;
+}
+
+.mode-switch {
+  display: flex;
+  gap: 10px;              
+  margin-bottom: 25px;
+}
+
+.mode-switch button {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px;     
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.mode-switch button:hover {
+  background: #e5e7eb;
+}
+
+.mode-switch .active {
+  background: #111827;
+  color: white;
+  border-color: #111827;
+}
+
+
+h2 {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.demo-box {
+  margin-top: 20px;
+  padding: 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  font-size: 13px;
+}
