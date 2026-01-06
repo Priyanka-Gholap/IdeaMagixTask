@@ -1,16 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [role, setRole] = useState(() => localStorage.getItem("role"));
 
-  const login = (token, role) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("role", role);
-    setToken(token);
-    setRole(role);
+  const login = (newToken, newRole) => {
+    localStorage.setItem("token", newToken);
+    localStorage.setItem("role", newRole);
+    setToken(newToken);
+    setRole(newRole);
   };
 
   const logout = () => {
@@ -25,4 +25,13 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+// ✅ custom hook (IMPORTANT)
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+  return context;
 };
