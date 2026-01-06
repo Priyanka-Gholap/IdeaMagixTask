@@ -1,4 +1,9 @@
 function CourseList() {
-  return <div>Course List</div>;
+  return (
+    <div>
+      <h2>Course List</h2>
+    </div>
+  );
 }
-export { CourseList };
+
+export default CourseList;
