@@ -1,20 +1,24 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Auth/Login";
+
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddCourse from "./pages/Admin/AddCourse";
 import AddLecture from "./pages/Admin/AddLecture";
 import AssignLecture from "./pages/Admin/AssignLecture";
 import CourseList from "./pages/Admin/CourseList";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      {/* ROOT FIX */}
+      {/* Default / root: redirect to login */}
       <Route path="/" element={<Navigate to="/login" replace />} />
 
+      {/* AUTH */}
       <Route path="/login" element={<Login />} />
 
+      {/* ADMIN ROUTES */}
       <Route
         path="/admin/dashboard"
         element={
@@ -59,6 +63,9 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      {/* Catch-all */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }
