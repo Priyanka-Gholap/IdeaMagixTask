@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./pages/Auth/Login";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
@@ -11,58 +11,56 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* AUTH */}
-        <Route path="/login" element={<Login />} />
+    <Routes>
+      {/* AUTH */}
+      <Route path="/login" element={<Login />} />
 
-        {/* ADMIN ROUTES */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+      {/* ADMIN ROUTES */}
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute role="admin">
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
 
-        <Route
-          path="/admin/add-course"
-          element={
-            <ProtectedRoute role="admin">
-              <AddCourse />
-            </ProtectedRoute>
-          }
-        />
+      <Route
+        path="/admin/add-course"
+        element={
+          <ProtectedRoute role="admin">
+            <AddCourse />
+          </ProtectedRoute>
+        }
+      />
 
-        <Route
-          path="/admin/add-lecture"
-          element={
-            <ProtectedRoute role="admin">
-              <AddLecture />
-            </ProtectedRoute>
-          }
-        />
+      <Route
+        path="/admin/add-lecture"
+        element={
+          <ProtectedRoute role="admin">
+            <AddLecture />
+          </ProtectedRoute>
+        }
+      />
 
-        <Route
-          path="/admin/assign-lecture"
-          element={
-            <ProtectedRoute role="admin">
-              <AssignLecture />
-            </ProtectedRoute>
-          }
-        />
+      <Route
+        path="/admin/assign-lecture"
+        element={
+          <ProtectedRoute role="admin">
+            <AssignLecture />
+          </ProtectedRoute>
+        }
+      />
 
-        <Route
-          path="/admin/courses"
-          element={
-            <ProtectedRoute role="admin">
-              <CourseList />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+      <Route
+        path="/admin/courses"
+        element={
+          <ProtectedRoute role="admin">
+            <CourseList />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
 
