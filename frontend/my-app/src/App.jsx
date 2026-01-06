@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Auth/Login.jsx";
+import Login from "./pages/Auth/Login";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddCourse from "./pages/Admin/AddCourse";
+import AddLecture from "./pages/Admin/AddLecture";
 import AssignLecture from "./pages/Admin/AssignLecture";
-import AllInstructors from "./pages/Admin/AllInstructors";
-import AllLectures from "./pages/Admin/AllLectures";
+import CourseList from "./pages/Admin/CourseList";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -13,6 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* AUTH */}
         <Route path="/login" element={<Login />} />
 
         {/* ADMIN ROUTES */}
@@ -35,6 +36,15 @@ function App() {
         />
 
         <Route
+          path="/admin/add-lecture"
+          element={
+            <ProtectedRoute role="admin">
+              <AddLecture />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/admin/assign-lecture"
           element={
             <ProtectedRoute role="admin">
@@ -44,19 +54,10 @@ function App() {
         />
 
         <Route
-          path="/admin/instructors"
+          path="/admin/courses"
           element={
             <ProtectedRoute role="admin">
-              <AllInstructors />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/admin/lectures"
-          element={
-            <ProtectedRoute role="admin">
-              <AllLectures />
+              <CourseList />
             </ProtectedRoute>
           }
         />
