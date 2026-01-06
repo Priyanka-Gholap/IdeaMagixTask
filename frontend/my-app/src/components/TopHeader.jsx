@@ -1,21 +1,19 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const TopHeader = () => {
-  const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { logout } = useAuth(); // ✅ FIX
 
   const handleLogout = () => {
     logout();
-    navigate("/", { replace: true });
+    navigate("/login");
   };
 
   return (
     <div className="top-header">
-      <button onClick={handleLogout} className="logout-btn">
-        Logout
-      </button>
+      <h2>Admin Panel</h2>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
