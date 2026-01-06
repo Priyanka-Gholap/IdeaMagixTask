@@ -2,7 +2,9 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+// ======================
 // LOGIN (Admin + Instructor)
+// ======================
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -29,16 +31,17 @@ export const login = async (req, res) => {
 
     res.json({ token, role: user.role });
   } catch (error) {
-    console.error("LOGIN ERROR:", error); // 🔥 THIS LINE IS CRITICAL
+    console.error("LOGIN ERROR:", error);
     res.status(500).json({ message: "Login failed" });
   }
 };
 
-
-// SIGNUP (Instructor only)
+// ======================
+// SIGNUP (Admin + Instructor)
+// ======================
 export const signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
@@ -55,7 +58,7 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role: "instructor",
+      role: role || "instructor"
     });
 
     if (!process.env.JWT_SECRET) {
@@ -74,4 +77,3 @@ export const signup = async (req, res) => {
     res.status(500).json({ message: "Signup failed" });
   }
 };
-
