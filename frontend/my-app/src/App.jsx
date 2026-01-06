@@ -1,21 +1,20 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Auth/Login";
-
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddCourse from "./pages/Admin/AddCourse";
 import AddLecture from "./pages/Admin/AddLecture";
 import AssignLecture from "./pages/Admin/AssignLecture";
 import CourseList from "./pages/Admin/CourseList";
-
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Routes>
-      {/* AUTH */}
+      {/* ROOT FIX */}
+      <Route path="/" element={<Navigate to="/login" replace />} />
+
       <Route path="/login" element={<Login />} />
 
-      {/* ADMIN ROUTES */}
       <Route
         path="/admin/dashboard"
         element={
