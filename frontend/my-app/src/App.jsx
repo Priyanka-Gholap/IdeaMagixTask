@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/Login";
+import Login from "./pages/Auth/Login.jsx";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AddCourse from "./pages/Admin/AddCourse";
