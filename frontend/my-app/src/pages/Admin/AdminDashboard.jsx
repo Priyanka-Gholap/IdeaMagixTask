@@ -1,10 +1,41 @@
 import Sidebar from "../../components/Sidebar";
 import TopHeader from "../../components/TopHeader";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
+  const [stats, setStats] = useState({
+    totalCourses: 0,
+    totalInstructors: 0,
+    upcomingLectures: 0,
+    totalLectures: 0,
+  });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/admin/dashboard-stats`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+
+        setStats(res.data);
+      } catch (error) {
+        console.error("Failed to fetch dashboard stats", error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
     <div className="admin-layout">
+      {/* SIDEBAR */}
       <Sidebar />
 
       <div className="admin-main">
@@ -19,22 +50,22 @@ const AdminDashboard = () => {
           <div className="stats-grid">
             <div className="stat-card blue">
               <p>Total Courses</p>
-              <h2>1</h2>
+              <h2>{stats.totalCourses}</h2>
             </div>
 
             <div className="stat-card green">
               <p>Total Instructors</p>
-              <h2>5</h2>
+              <h2>{stats.totalInstructors}</h2>
             </div>
 
             <div className="stat-card orange">
               <p>Upcoming Lectures</p>
-              <h2>0</h2>
+              <h2>{stats.upcomingLectures}</h2>
             </div>
 
             <div className="stat-card purple">
               <p>Total Lectures</p>
-              <h2>1</h2>
+              <h2>{stats.totalLectures}</h2>
             </div>
           </div>
 
@@ -52,7 +83,8 @@ const AdminDashboard = () => {
                 <span className="badge">Beginner</span>
                 <h4>MERN Stack</h4>
                 <p>
-                  Learn full stack development using MongoDB, Express, React and Node.js
+                  Learn full stack development using MongoDB, Express, React and
+                  Node.js
                 </p>
               </div>
             </div>
